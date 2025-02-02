@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - Sago Bliss</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Inter", sans-serif;
+      }
+
+      :root {
+        --primary: #ff6b35;
+        --secondary: #ff9f1c;
+        --background: #fff5e6;
+        --text: #333333;
+      }
+
+      .header {
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #ffffff;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #ff6b35;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-link:hover {
+        color: #ff6b35;
+      }
+
+      .btn-primary {
+        background: #ff6b35;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .btn-primary:hover {
+        background: #ff9f1c;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 2rem;
+      }
+
+      .mobile-nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 5%;
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 200px;
+        padding: 1rem;
+        border-radius: 10px;
+      }
+
+      .mobile-nav a {
+        padding: 10px 0;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .mobile-nav a:last-child {
+        border-bottom: none;
+      }
+
+      @media (max-width: 700px) {
+        .nav-menu {
+          display: none;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .mobile-nav.show {
+          display: flex;
+        }
+      }
+
+      .checkout-section {
+        padding: 4rem 5%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .checkout-container {
+        width: 100%;
+        max-width: 600px;
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-label {
+        font-weight: 600;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        font-size: 1rem;
+      }
+
+      .checkout-summary {
+        background: var(--background);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+
+      .total {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--primary);
+        text-align: right;
+      }
+
+      .submit-btn {
+        background: var(--primary);
+        color: white;
+        padding: 1rem;
+        border: none;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-align: center;
+      }
+
+      .submit-btn:hover {
+        background: var(--secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">Sago Bliss</div>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about-us.html" class="nav-link">About us</a>
+        <a href="contact.html" class="nav-link">Contact us</a>
+      </nav>
+      <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+      <nav class="mobile-nav" id="mobile-nav">
+        <a href="index.html">Home</a>
+        <a href="about-us.html">About us</a>
+        <a href="contact.html">Contact us</a>
+      </nav>
+    </header>
+
+    <section class="checkout-section">
+      <div class="checkout-container">
+        <div class="form-group">
+          <label for="name" class="form-label">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-input"
+            placeholder="Enter your full name"
+          />
+        </div>
+        <div class="form-group">
+          <label for="address" class="form-label">Delivery Address</label>
+          <input
+            type="text"
+            id="address"
+            class="form-input"
+            placeholder="Enter your address"
+          />
+        </div>
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input
+            type="tel"
+            id="phone"
+            class="form-input"
+            placeholder="Enter your phone number"
+          />
+        </div>
+        <div class="form-group">
+          <label for="quantity" class="form-label">Quantity</label>
+          <input
+            type="number"
+            id="quantity"
+            class="form-input"
+            value="1"
+            min="1"
+            oninput="updateTotal()"
+          />
+        </div>
+        <div class="checkout-summary">
+          <h2>Order Summary</h2>
+          <div class="summary-item">
+            <p>Mango Sago</p>
+            <p id="price">Rp 15,000</p>
+          </div>
+          <div class="total">Total: <span id="total">Rp 15,000</span></div>
+        </div>
+        <button type="submit" class="submit-btn" onclick="getToken()">
+          Place Order
+        </button>
+      </div>
+    </section>
+
+    <script
+      src="https://app.sandbox.midtrans.com/snap/snap.js"
+      data-client-key="SB-Mid-client-4VOgyCfJVzpYdppi"
+    ></script>
+    <script>
+      const unitPrice = 15000; // Harga dasar per item
+
+      function formatRupiah(angka) {
+        return "Rp " + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
+      function updateTotal() {
+        const quantity = document.getElementById("quantity").value;
+        const total = unitPrice * quantity;
+        document.getElementById("total").innerText = formatRupiah(total);
+      }
+
+      async function getToken() {
+        let name = document.getElementById("name").value;
+        let address = document.getElementById("address").value;
+        let phone = document.getElementById("phone").value;
+        let quantity = document.getElementById("quantity").value;
+        let total = unitPrice * quantity;
+
+        if (!name || !address || !phone || !quantity) {
+          alert("Please fill in all fields before placing the order.");
+          return;
+        }
+
+        try {
+          const response = await fetch("php/placeOrder.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({
+              name: name,
+              address: address,
+              phone: phone,
+              quantity: quantity,
+              total_amount: total,
+            }),
+          });
+
+          const data = await response.json();
+          snap.pay(data.token, {
+            onSuccess: function (result) {
+              alert("Pembayaran berhasil!");
+              console.log(result);
+            },
+            onPending: function (result) {
+              alert("Menunggu pembayaran selesai.");
+              console.log(result);
+            },
+            onError: function (result) {
+              alert("Pembayaran gagal!");
+              console.error(result);
+            },
+            onClose: function () {
+              alert("Anda menutup popup sebelum menyelesaikan pembayaran.");
+            },
+          });
+        } catch (err) {
+          console.error("Error:", err.message);
+          alert("Error processing payment. Please try again.");
+        }
+      }
+    </script>
+  </body>
+</html>
